@@ -1,0 +1,183 @@
+@import "../Helper/mixin";
+@import "../Helper/variables";
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+.w-100 {
+  width: 100%;
+}
+.w-90 {
+  width: 90%;
+}
+.w-80 {
+  width: 80%;
+}
+.w-70 {
+  width: 70%;
+}
+.w-60 {
+  width: 60%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-40 {
+  width: 40%;
+}
+.w-30 {
+  width: 30%;
+}
+
+.w-33 {
+  width: calc(100% / 3);
+}
+.w-20 {
+  width: 20%;
+}
+.w-10 {
+  width: 10%;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.mr-30 {
+  margin-right: 30px;
+}
+
+.cl-grey {
+  color: rgb(128, 126, 126);
+}
+
+.light {
+  background: $color-blue !important;
+  position: static !important;
+
+  .nav-collapse {
+    background: #4d46fa;
+    a {
+      @include styleText($color-white-0!important, $fs-1, $fw-normal);
+      text-decoration: none;
+      padding: 0 20px;
+    }
+  }
+  .btn-nav {
+    .btn-booking {
+      @include styleButton(
+        $color-white-0,
+        $color-white-0,
+        $pd-1 - 5,
+        $pd-1 + 1,
+        $border-radius-2
+      );
+      @include styleText($color-blue, $fs-1, $fw-bold);
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .icon-bar {
+    path {
+      fill: $color-white-0;
+    }
+  }
+}
+
+.dp-calendar-wrapper {
+  .dp-calendar-day {
+    border: none;
+    background: white;
+    width: 40px;
+    padding: 5px 0;
+  }
+  .dp-calendar-weekday {
+    width: 40px;
+    border: none;
+    color: #4d46fa;
+  }
+}
+.dp-picker-input {
+  border: none;
+  padding: 5px 0;
+  font-size: 24px;
+  color: #4d46fa;
+  &:focus {
+    outline: none;
+  }
+}
+.show {
+  visibility: visible;
+  animation: showModal 0.35;
+}
+.hide {
+  visibility: hidden;
+}
+
+.hidden {
+  display: none;
+}
+.showModal {
+  display: flex;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.overHide {
+  overflow: hidden;
+}
+
+.ml-15 {
+  margin-left: 15px;
+}
+
+.mr-15 {
+  margin-right: 15px;
+}
+
+.fs-12 {
+  font-size: 12px;
+}
+.d-none {
+  display: none;
+}
+
+::-webkit-input-placeholder {
+  /* Edge */
+  color: #4d46fa;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer */
+  color: #4d46fa;
+}
+
+::placeholder {
+  color: #4d46fa;
+}
+
+.num-blue {
+  @include styleText($color-blue, $fs-1 + 1, $fw-bold-0 - 100);
+}
+
+@include responsive("extra-large") {
+  .dp-picker-input {
+    padding: 5px 0;
+    font-size: 20px;
+  }
+  .container{
+    width: 88%;
+  }
+}
+
+@include responsive("large") {
+  .dp-picker-input {
+    font-size: 18px;
+  }
+  
+}

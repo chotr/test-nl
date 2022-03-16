@@ -1,0 +1,20 @@
+.booking-btnBlue{
+    @include styleButton($color-blue, $color-blue, $pd-1 - 5, $pd-1 + 1, $border-radius-2);
+    @include styleText($color-white-0, $fs-1, $fw-bold);
+    // &:hover{
+    //     @include styleButtonHover($color-white-0, $color-black-0, $color-black-0);
+    // }
+    &:focus{
+        outline: none;
+    }
+}
+.ude-btnRed{
+    @include styleButton($color-red-0, $color-red-0, $pd-1 + 1, $pd-1 + 2, $border-radius);
+    @include styleText($color-white-0, $fs-0, $fw-bold-1);
+    &:hover{
+        @include styleButtonHover($color-red-2, $color-white-0, $color-red-2);
+    }
+    &:focus{
+        outline:none;
+    }
+}

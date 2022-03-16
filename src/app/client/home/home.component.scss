@@ -1,0 +1,47 @@
+@import "../../../sass/Base/customize";
+@import "../../../sass/Helper/mixin";
+@import "../../../sass/Helper/variables";
+@import "../../../sass/Components/button";
+
+.home {
+  .search-flight {
+    position: relative;
+    .content {
+      .content_text {
+        position: absolute;
+        top: 30%;
+        left: 15%;
+        flex-direction: column;
+        span {
+          line-height: 75px;
+          @include styleText($color-black-0, $fs-5, $fw-light-1);
+        }
+        .bold-blue {
+          @include styleText($color-blue, $fs-5, $fw-normal);
+        }
+      }
+      .input-radio {
+        input {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@keyframes showModal {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+@include responsive("large") {
+  .home {
+    .search-flight {
+      margin-bottom: 80px;
+    }
+  }
+}

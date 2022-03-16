@@ -1,0 +1,124 @@
+<div class="search-form container">
+    <div class="content">
+        <div class="select select_1 d-flex">
+            <div class="input-radio d-flex">
+                <input type="radio" id="trip" name="trip" value="One way/Round-trip">
+                <label class="mr-30" for="One way/Round-trip">One way/Round-trip</label><br>
+                <input type="radio" id="nulti" name="trip" value="multi-city">
+                <label class="mr-30" for="Multi-city">Multi-city</label><br>
+            </div>
+            <div class="select-adult-child mr-30" id="select-adult-child">
+                <div class="choose-num" id="choose-num">
+                    <span class="num-blue">{{adult}}</span> Adult,
+                    <span class="num-blue">{{child}}</span> children
+                </div>
+                <div class="modal hide" id="modalAC">
+                    <div class="modal-item adult">
+                        <div class="text">
+                            <span>Adult</span>
+                            <span class="cl-grey fs-12"><i class="fa fa-angle-right"></i> 12</span>
+                        </div>
+                        <div class="selectnum">
+                            <button (click)="decrementAdult()"><i class="fa fa-angle-left"></i></button>
+                            <span class="num-select">{{adult}}</span>
+                            <button (click)="incrementAdult()"><i class="fa fa-angle-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="modal-item childen">
+                        <div class="text">
+                            <span>Childen</span>
+                            <span class="cl-grey fs-12"><i class="fa fa-angle-left"></i> 12</span>
+                        </div>
+                        <div class="selectnum">
+                            <button (click)="decrementChild()"><i class="fa fa-angle-left"></i></button>
+                            <span class="num-select">{{child}}</span>
+                            <button (click)="incrementChild()"><i class="fa fa-angle-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="type">
+                <select name="type" id="type">
+                    <option value="Business">Business class</option>
+                    <option value="Family">Family</option>
+                </select>
+            </div>
+        </div>
+        <div class="select select_2 d-flex">
+            <div class="place w-50 relative d-flex">
+                <div class="w-50  relative overHide mr-15">
+                    <div class="from place-item" id="placeFrom">
+                        <span class="cl-grey fs-12">From</span>
+                        <span class="name">{{nameFrom}}</span>
+                        <span class="place">{{placeFrom}}</span>
+                        <div class="circle left"></div>
+                    </div>
+                </div>
+                <div class="list hide" id="fromModal">
+                    <input type="text" class="search" name="inputFrom" placeholder="Input place" [ngModel]="inputFrom"
+                        (ngModelChange)="saverange($event)">
+                    <ng-container *ngFor="let place of listPlace">
+                        <div class="item" (click)="getPlace(place.id,place.name, place.place)">{{place.name}}
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="arror">
+                    <svg width="26" height="14" viewBox="0 0 26 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.35712 5.28091H17.531V2.27258H6.35712V0L0 3.67016L6.35712 7.34037V5.28091Z"
+                            fill="black" />
+                        <path d="M7.64639 11.7274H18.8203V14L25.1774 10.3298L18.8203 6.65964V8.71905H7.64639V11.7274Z"
+                            fill="black" />
+                    </svg>
+                </div>
+                <div class="w-50 relative overHide ml-15">
+                    <div class="to  place-item" id="placeTo">
+                        <span class="cl-grey fs-12">To</span>
+                        <span class="name">{{nameTo}}</span>
+                        <span class="place">{{placeTo}}</span>
+                        <div class="circle right"></div>
+                    </div>
+                </div>
+                <div class="list right hide" id="toModal">
+                    <input type="text" class="search" name="inputTo" placeholder="Input place" [ngModel]="inputTo"
+                        (ngModelChange)="saverange($event)">
+                    <ng-container *ngFor="let place of listPlace">
+                        <div class="item" (click)="getPlaceTo(place.id, place.name, place.place)">{{place.name}}
+                        </div>
+                    </ng-container>
+
+                </div>
+            </div>
+            <div class="time w-50 d-flex">
+                <div class="departure item-time w-50">
+                    <span class="cl-grey fs-12">DEPARTURE</span>
+                    <dp-date-picker displayDate="current date" [(ngModel)]="selectedDateFrom"
+                        (ngModelChange)="getDateDe($event)" placeholder="Choose departure date">
+                    </dp-date-picker>
+                    <div class="next_pr">
+                        <span class="prev">Prev</span>
+                        <span class="next">Next</span>
+                    </div>
+                </div>
+                <div class="return item-time w-50">
+                    <span class="cl-grey fs-12">RETURN</span>
+                    <dp-date-picker [(ngModel)]="selectedDateTo" (ngModelChange)="getDateRe($event)"
+                        placeholder="Choose return date"></dp-date-picker>
+                    <div class="next_pr">
+                        <span class="prev">Prev</span>
+                        <span class="next">Next</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="button">
+            <button (click)="navigaTo()" class="btn-search">Search Flights
+                <span>
+                    <svg width="23" height="14" viewBox="0 0 23 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.2381 1L22 7M22 7L16.2381 13M22 7H0" stroke="white" />
+                    </svg>
+
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

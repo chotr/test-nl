@@ -1,0 +1,89 @@
+@import "../../../sass/Base/customize";
+@import "../../../sass/Helper/mixin";
+@import "../../../sass/Helper/variables";
+@import "../../../sass/Components/button";
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 16px;
+  }
+  .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 16px;
+  }
+  .navbar-brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .icon-language {
+      margin-left: $mg-1;
+    }
+  }
+  .navbar-toggler {
+    display: none;
+    padding: 5px 15px;
+    border: none;
+    background: #ffffff00;
+    svg {
+      height: 30px;
+      width: 30px;
+    }
+  }
+  .nav-collapse {
+    a {
+      @include styleText($color-black-0, $fs-1, $fw-normal);
+      text-decoration: none;
+      padding: 0 20px;
+    }
+  }
+  .hideMenu {
+    display: block;
+  }
+  .showMenu {
+    display: block;
+  }
+}
+
+@include responsive("large") {
+  .navbar {
+    .content {
+      position: relative;
+      padding: 5px 15px;
+    }
+    .container {
+      padding: 15px 5px;
+      width: 100%;
+    }
+    .navbar-toggler {
+      display: block;
+    }
+    .nav-collapse {
+      position: absolute;
+      top: 90%;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      padding-bottom: 20px;
+      .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        line-height: 30px;
+      }
+    }
+    .hideMenu {
+      display: none;
+    }
+  }
+}
