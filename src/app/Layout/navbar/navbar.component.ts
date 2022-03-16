@@ -11,6 +11,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {}
   collapseMenu() {
     const menu = document.getElementById('nav-collapse') as HTMLElement;
+    
     menu.classList.toggle('hideMenu');
     menu.classList.toggle('showMenu');
   }

@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SheduleComponent implements OnInit, AfterViewInit {
   textURL: any;
+  icon = '../../../assets/icon/icon-bambo.svg';
+  company = 'Bamboo Airways';
   url: any;
   idFrom: any;
   nameFrom: any;
@@ -20,6 +22,7 @@ export class SheduleComponent implements OnInit, AfterViewInit {
   return: any;
   dateFrom: any;
   dateRe: any;
+  price: any;
   listFlight = [
     {
       id: '1',
@@ -57,6 +60,70 @@ export class SheduleComponent implements OnInit, AfterViewInit {
       id: '3',
       company: 'Vietnam Airlines',
       sh: 'AB-183',
+      icon: '../../../assets/icon/vn-airline.svg',
+      timeStart: '21:50',
+      timeTo: '23:40',
+      timeCount: '1h 30m',
+      baggage: 20,
+      fee: 1330000,
+      feeCount: 4000,
+      service: [{ ser1: 'Meal', ser2: 'Entertainment' }],
+      aircraft: 'Airbus A321',
+      seatLayout: '3-3',
+      seatPeach: '29 inches (standard)',
+    },
+    {
+      id: '4',
+      company: 'Bamboo Airways',
+      sh: 'QH-183',
+      icon: '../../../assets/icon/icon-bambo.svg',
+      timeStart: '20:40',
+      timeTo: '22:10',
+      timeCount: '1h 30m',
+      baggage: 20,
+      fee: 1320000,
+      feeCount: 4000,
+      service: [{ ser1: 'Meal', ser2: 'Entertainment' }],
+      aircraft: 'Airbus A321',
+      seatLayout: '3-3',
+      seatPeach: '29 inches (standard)',
+    },
+    {
+      id: '5',
+      company: 'Vietnam Airlines',
+      sh: 'AB-183',
+      icon: '../../../assets/icon/vn-airline.svg',
+      timeStart: '21:40',
+      timeTo: '23:10',
+      timeCount: '1h 30m',
+      baggage: 20,
+      fee: 1326000,
+      feeCount: 4000,
+      service: [{ ser1: 'Meal', ser2: 'Entertainment' }],
+      aircraft: 'Airbus A321',
+      seatLayout: '3-3',
+      seatPeach: '29 inches (standard)',
+    },
+    {
+      id: '6',
+      company: 'Bamboo Airways',
+      sh: 'QH-183',
+      icon: '../../../assets/icon/icon-bambo.svg',
+      timeStart: '21:40',
+      timeTo: '23:10',
+      timeCount: '1h 30m',
+      baggage: 20,
+      fee: 1326000,
+      feeCount: 4000,
+      service: [{ ser1: 'Meal', ser2: 'Entertainment' }],
+      aircraft: 'Airbus A321',
+      seatLayout: '3-3',
+      seatPeach: '29 inches (standard)',
+    },
+    {
+      id: '7',
+      company: 'Bamboo Airways',
+      sh: 'QH-183',
       icon: '../../../assets/icon/icon-bambo.svg',
       timeStart: '21:40',
       timeTo: '23:10',
@@ -91,7 +158,7 @@ export class SheduleComponent implements OnInit, AfterViewInit {
       id: 'SGN',
       name: 'Ho Chi Minh',
       place: 'Ho Chi Minh, Viet Nam',
-      sanBay: 'Tansonnhat Intl',
+      sanBay: 'Tansonnhat',
     },
     {
       id: 'BMT',
@@ -156,10 +223,17 @@ export class SheduleComponent implements OnInit, AfterViewInit {
   ];
   ngOnInit(): void {
     (document.getElementById('navbar') as HTMLElement).classList.add('light');
+    (document.getElementById('contact') as HTMLElement).style.height = '70px';
+    (document.getElementById('footer') as HTMLElement).style.background =
+      '#f4f2f9';
+    const select = document.getElementById('list_flight') as HTMLElement;
     this.route.queryParams.subscribe((params) => {
       this.textURL = params;
-      console.log(this.textURL);
     });
+    if (this.textURL === {}) {
+      select.style.display = 'none';
+      console.log('null');
+    }
     this.toggleModal();
     this.getInFoFlight();
   }
@@ -179,33 +253,46 @@ export class SheduleComponent implements OnInit, AfterViewInit {
     });
   }
   getInFoFlight() {
+    console.log('NGfnngd', this.textURL);
+    const select = document.getElementById('list_flight') as HTMLElement;
     this.idFrom = this.textURL.from;
     this.idTo = this.textURL.to;
     this.dateFrom = this.replaceSpace(this.textURL.dateF);
+
+    if (this.dateFrom === undefined) {
+      select.style.display = 'none';
+    }
     this.dateRe = this.replaceSpace(this.textURL.dateR);
     for (let place of this.listPlace) {
       if (this.idFrom === place.id) {
         this.nameFrom = place.name;
+        this.sanFrom = place.sanBay;
       }
       if (this.idTo === place.id) {
         this.nameTo = place.name;
+        this.sanTo = place.sanBay;
       }
     }
     this.adult = this.textURL.adult;
     this.child = this.textURL.child;
-    console.log(this.dateFrom);
+    // console.log(this.dateFrom);
   }
   replaceSpace(text: string): string {
+    console.log(text)
     let string = '';
-    for (let index = 0; index < text.length; index++) {
-      const element = text[index];
-      if (index === 6) {
-        string += ' ';
-      } else {
-        string += element;
+    if (text === 'undefined') {
+      return '';
+    } else {  
+      for (let index = 0; index < text.length; index++) {
+        const element = text[index];
+        if (index === 6) {
+          string += ' ';
+        } else {
+          string += element;
+        }
       }
+      return string;
     }
-    return string;
   }
   collapse() {
     let num = this.listFlight.length;
@@ -219,16 +306,41 @@ export class SheduleComponent implements OnInit, AfterViewInit {
       select.addEventListener('click', () => {
         element.classList.toggle('showModal');
         element.classList.toggle('hidden');
-        element2.classList.add('d-none');
+        // if (select2.classList.toggle('details') === true) {
+        //   select2.classList.remove('details');
+        // }
+        // if (element.classList.toggle('d-none') === false) {
+        //   select.classList.toggle('details');
+        // }
+
+        if (element2.classList.toggle('d-none') === false) {
+          element2.classList.add('d-none');
+        }
         element.classList.remove('d-none');
       });
 
       select2.addEventListener('click', () => {
         element2.classList.toggle('showModal');
         element2.classList.toggle('hidden');
-        element.classList.add('d-none');
+        // if (select.classList.toggle('details') === true) {
+        //   select.classList.remove('details');
+        // }
+        // select2.classList.toggle('details');
+        if (element.classList.toggle('d-none') === false) {
+          element.classList.add('d-none');
+        }
         element2.classList.remove('d-none');
       });
     }
+  }
+  getCompany(icon: any, company: any, price: number): void {
+    (document.getElementById('total') as HTMLElement).style.display = 'flex';
+    this.company = company;
+    this.icon = icon;
+    this.price = this.formatCur(price);
+  }
+
+  formatCur(num: number): string {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }

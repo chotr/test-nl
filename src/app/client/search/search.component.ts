@@ -21,6 +21,8 @@ export class SearchComponent implements OnInit {
   placeTo = 'Ho Chi Minh, Viet Nam';
   inputFrom: any;
   inputTo: any;
+  dateF = new Date();
+  dateR = new Date();
   selectedDateFrom: any;
   selectedDateTo: any;
   listPlace = [
@@ -234,7 +236,9 @@ export class SearchComponent implements OnInit {
   getDateDe(event: any) {
     let array = [];
     let time;
-
+    let date = new Date(event.toString());
+    console.log(date);
+    this.dateF = date;
     array = event?.toLocaleString().split(' ');
     time = array[0].split(',')[0];
     for (let index = 0; index < array.length; index++) {
@@ -249,33 +253,55 @@ export class SearchComponent implements OnInit {
   getDateRe(event: any) {
     let array = [];
     let time;
-
+    let date = new Date(event.toString());
+    console.log(date);
+    this.dateR = date;
     array = event?.toLocaleString().split(' ');
     time = array[0].split(',')[0];
     for (let index = 0; index < array.length; index++) {
       const element = array[index];
       if (index > 0 && index < 4) {
-        if(index === 2){
+        if (index === 2) {
         }
         time += ',' + element;
       }
     }
     this.inputTo = time;
-    console.log(this.inputTo)
   }
 
   navigaTo() {
-    window.location.href =
-      'schedule?' +
-      'from=' +
-      this.idFrom +
-      '&to=' +
-      this.idTo +
-      '&adult=' +
-      this.adult +
-      '&child=' +
-      this.child+
-    '&dateF=' + this.inputFrom + '&dateR=' + this.inputTo;
+    console.log(this.dateF.getTime() === this.dateR.getTime());
+    if (this.inputFrom !== undefined) {
+      if (this.dateF.getTime() > this.dateR.getTime()) {
+        (document.getElementById('alertd') as HTMLElement).style.display = 'block';
+        setTimeout(() => {
+          (document.getElementById('alertd') as HTMLElement).style.display =
+            'none';
+        }, 2000);
+      } else {
+        window.location.href =
+          'schedule?' +
+          'from=' +
+          this.idFrom +
+          '&to=' +
+          this.idTo +
+          '&adult=' +
+          this.adult +
+          '&child=' +
+          this.child +
+          '&dateF=' +
+          this.inputFrom +
+          '&dateR=' +
+          this.inputTo;
+      }
+    } else {
+      (document.getElementById('alert') as HTMLElement).style.display = 'block';
+      setTimeout(() => {
+        (document.getElementById('alert') as HTMLElement).style.display =
+          'none';
+      }, 2000);
+    }
+
     // this.router.navigate(['schedule/', 'from=' + this.idFrom + '?to=' + this.idTo]);
   }
 }

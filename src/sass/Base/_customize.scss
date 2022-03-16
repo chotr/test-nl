@@ -55,7 +55,11 @@
 .light {
   background: $color-blue !important;
   position: static !important;
-
+  .navbar-toggler {
+    svg {
+      fill: white;
+    }
+  }
   .nav-collapse {
     background: #4d46fa;
     a {
@@ -63,6 +67,7 @@
       text-decoration: none;
       padding: 0 20px;
     }
+    
   }
   .btn-nav {
     .btn-booking {
@@ -84,6 +89,18 @@
       fill: $color-white-0;
     }
   }
+}
+
+.fw-500{
+  font-weight: 500;
+}
+
+.uppercase {
+text-transform: uppercase;
+}
+
+.flex-col{
+  flex-direction: column;
 }
 
 .dp-calendar-wrapper {
@@ -170,7 +187,7 @@
     padding: 5px 0;
     font-size: 20px;
   }
-  .container{
+  .container {
     width: 88%;
   }
 }
@@ -179,5 +196,17 @@
   .dp-picker-input {
     font-size: 18px;
   }
-  
+}
+
+@include responsive("mobile") {
+  .dp-picker-input {
+    width: 100%;
+  }
+  .cdk-overlay-container, .cdk-global-overlay-wrapper {
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 90%!important;
+}
 }

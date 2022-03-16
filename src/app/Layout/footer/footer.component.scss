@@ -24,6 +24,7 @@ footer {
         border: 1px solid black;
         width: 40px;
         background: black;
+        margin-bottom: 5px;
       }
       .text {
         padding-bottom: $pd-0;
@@ -32,6 +33,53 @@ footer {
     }
     .left {
       margin-right: $mg-2;
+    }
+  }
+}
+
+@include responsive("medium") {
+  footer {
+    .contact {
+      font-size: 12px;
+      height: 200px;
+      .item {
+        .icon {
+          padding: 0 1px;
+        }
+        .text {
+          margin-right: 0;
+        }
+        .line {
+          width: 25px;
+          margin: 0 3px;
+        }
+      }
+    }
+  }
+}
+
+@include responsive("small") {
+  footer {
+    .contact {
+      font-size: 12px;
+      height: 200px;
+      .contact-left {
+        flex-direction: column;
+      }
+      .left {
+        margin-right: 10px;
+      }
+      .item {
+        .icon {
+          padding: 0 5px;
+        }
+        .text {
+          margin-right: 15px;
+        }
+        .line {
+          display: none;
+        }
+      }
     }
   }
 }

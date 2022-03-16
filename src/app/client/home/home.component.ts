@@ -24,6 +24,10 @@ export class HomeComponent implements OnInit, OnChanges {
     (document.getElementById('navbar') as HTMLElement).classList.remove(
       'light'
     );
+    const nav = document.getElementById('navbar') as HTMLElement;
+    (document.getElementById('menuBtn') as HTMLElement).addEventListener('click',()=>{
+      nav.classList.toggle('light')
+    })
 
   }
   

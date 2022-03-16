@@ -38,10 +38,49 @@
   }
 }
 
+@include responsive("extra-large") {
+  .home {
+    .search-flight {
+      margin-bottom: 30px;
+      .content {
+        .content_text {
+          top: 17%;
+          span {
+            line-height: 67px;
+            font-size: 48px;
+          }
+          .bold-blue {
+            font-size: 48px;
+          }
+        }
+      }
+    }
+  }
+}
+
 @include responsive("large") {
   .home {
     .search-flight {
       margin-bottom: 80px;
+    }
+  }
+}
+
+@include responsive("medium") {
+  .home {
+    .search-flight {
+      margin-bottom: 120px;
+      .content {
+        .content_text {
+          span {
+            line-height: 51px;
+            font-size: 40px;
+          }
+          .bold-blue {
+            font-size: 40px;
+          }
+        }
+      }
     }
   }
 }

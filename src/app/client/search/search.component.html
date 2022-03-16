@@ -1,4 +1,14 @@
 <div class="search-form container">
+    <div class="alert warning d-none" id="alert">
+        <div class="text">
+            <h3>Choose flight information</h3>
+        </div>
+    </div>
+    <div class="alert danger d-none" id="alertd">
+        <div class="text">
+            <h3>Choose a valid date</h3>
+        </div>
+    </div>
     <div class="content">
         <div class="select select_1 d-flex">
             <div class="input-radio d-flex">
@@ -38,7 +48,7 @@
                 </div>
             </div>
             <div class="type">
-                <select name="type" id="type">
+                <select name="type" id="type" style="background: white;">
                     <option value="Business">Business class</option>
                     <option value="Family">Family</option>
                 </select>

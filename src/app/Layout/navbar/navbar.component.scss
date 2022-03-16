@@ -60,10 +60,10 @@
   .navbar {
     .content {
       position: relative;
-      padding: 5px 15px;
+      padding: 5px 15px !important;
     }
     .container {
-      padding: 15px 5px;
+      padding: 15px 5px !important;
       width: 100%;
     }
     .navbar-toggler {
@@ -79,11 +79,53 @@
       .navbar-nav {
         display: flex;
         flex-direction: column;
-        line-height: 30px;
+        line-height: 30px !important;
       }
     }
     .hideMenu {
       display: none;
+    }
+  }
+}
+
+@include responsive("medium") {
+  .navbar {
+    .booking-btnBlue {
+      font-size: 12px !important;
+    }
+  }
+}
+
+@include responsive("small") {
+  .navbar {
+    .booking-btnBlue {
+      font-size: 11px !important;
+    }
+    .icon-bar {
+      svg {
+        width: 130px !important;
+      }
+    }
+  }
+}
+
+@include responsive("mobile") {
+  .navbar {
+    .container {
+      padding: 0px 5px !important;
+    }
+    .icon-bar {
+      svg {
+        width: 110px !important;
+      }
+    }
+    .icon-language {
+      svg {
+        width: 17px;
+      }
+    }
+    .booking-btnBlue {
+      padding: 10px 10px!important;
     }
   }
 }

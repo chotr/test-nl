@@ -3,7 +3,7 @@
     <div class="w-100">
         <div class="search">
             <div class="container d-flex">
-                <div class="w-80 d-flex">
+                <div class="w-80 display d-flex">
                     <div class="place relative d-flex w-50">
                         <div class="from place-item w-40 d-flex">
                             <span class="name">{{nameFrom}}({{idFrom}})</span>
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="list_flight container d-flex">
+        <div class="list_flight container d-flex" id="list_flight">
             <div class="list_flight_left">
                 <div class="filter d-flex">
                     <span class="text_filter item-filter">FILTER</span>
@@ -114,7 +114,8 @@
                                 <span class="name">{{item.company}}</span>
                             </div>
                             <div class="time d-flex">
-                                <div class="item_time time_des"><span>{{item.timeStart}}</span><span>{{idFrom}}</span>
+                                <div class="item_time time_des"><span class="text_i">{{item.timeStart}}</span><span
+                                        class="sym">{{idFrom}}</span>
                                 </div>
                                 <div class="item_time relative time_count"><span>{{item.timeCount}}</span>
                                     <span class="absolute">
@@ -128,7 +129,8 @@
                                     </span>
                                     <span>Direct</span>
                                 </div>
-                                <div class="item_time time_to"><span>{{item.timeTo}}</span><span>{{idFrom}}</span></div>
+                                <div class="item_time time_to"><span class="text_i">{{item.timeTo}}</span><span
+                                        class="sym">{{idFrom}}</span></div>
                             </div>
                             <div class="ifffu d-flex">
                                 <div class="ifffu_1">
@@ -141,8 +143,8 @@
                                         </svg>
 
                                     </span>
-                                    <span>Baggage</span>
-                                    <span>{{item.baggage}}</span>
+                                    <span class="mid">Baggage</span>
+                                    <span class="num-blue">{{item.baggage}}kg</span>
                                 </div>
                                 <div class="ifffu_2">
                                     <span>
@@ -160,43 +162,41 @@
                                         </svg>
 
                                     </span>
-                                    <span>In-flight</span>
-                                    <span>{{item.service[0].ser1}}</span>
+                                    <span class="mid">In-flight</span>
+                                    <span class="num-blue">{{item.service[0].ser1}}</span>
                                 </div>
                             </div>
                             <div class="price d-flex">
-                                <span class="old">{{item.fee}}</span>
-                                <span class="new">{{item.fee - item.feeCount}}</span>
+                                <span class="old cl-grey">{{formatCur(item.fee)}} vnd</span>
+                                <span class="new">{{formatCur(item.fee - item.feeCount)}} vnd</span>
                             </div>
                             <div class="choose">
-                                <button class="btn-choose">Choose</button>
+                                <button (click)="getCompany(item.icon, item.company, item.fee-item.feeCount)"
+                                    class="btn-choose">Choose</button>
                             </div>
                         </div>
                         <div class="collape">
                             <div class="nav-bar">
-                                <span class="cl-grey" id="{{'detai' + item.id}}">Flight detail</span>
-                                <span class="cl-grey" id="{{'fare' + item.id}}">fare info</span>
+                                <span class="cl-grey" id="{{'detai' + item.id}}" style="font-weight: 500;">Flight
+                                    detail</span>
+                                <span class="cl-grey" id="{{'fare' + item.id}}" style="font-weight: 500;">fare
+                                    info</span>
                             </div>
                             <div class="collapse-modal hidden fare d-flex" id="{{'fareCL' + item.id}}">
                                 <div class="w-40">
                                     <div class="title">CONDITIONS</div>
-                                    <div class="info">
+                                    <div class="info_p">
                                         <div class="company">
                                             <span class="logo"><img [src]="item.icon" alt=""></span>
                                             <div class="info_plane">
                                                 <span class="name">{{item.company}}</span>
-                                                <span>{{item.sh}}
-                                                    <svg width="3" height="3" viewBox="0 0 3 3" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="3" height="3" rx="1.5" fill="black" />
-                                                    </svg>
-                                                    Economy
+                                                <span class="sh">{{item.sh}}<span class="dot"></span><span>Economy</span>
                                                 </span>
                                             </div>
                                         </div>
                                         <div class="trip">
                                             <span class="nameFrom">{{nameFrom}}</span>
-                                            <span class="line">
+                                            <span class="line_ver">
                                                 <svg width="63" height="7" viewBox="0 0 63 7" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <rect x="0.5" y="0.5" width="6" height="6" rx="3" fill="white"
@@ -207,8 +207,8 @@
                                             </span>
                                             <span class="nameTo">{{nameTo}}</span>
                                         </div>
-                                        <span class="text-blue">Economy</span>
-                                        <span class="refun">Non - Refundable</span>
+                                        <span class="text-blue" style="color: #4d46fa; font-size: 12px;">Economy</span>
+                                        <span class="refun" style="font-size: 12px;">Non - Refundable</span>
                                     </div>
                                 </div>
                                 <div class="w-60">
@@ -218,15 +218,16 @@
                                             <span>Adult Basic Fare (x1)</span>
                                             <span>Tax</span>
                                             <span>Regular Total Price</span>
-                                            <span>Save</span>
+                                            <span class="save save_t">Save</span>
                                             <span>You Pay</span>
                                         </div>
                                         <div class="w-50 column">
-                                            <span>{{item.fee}}</span>
+                                            <span style="font-weight: 500;">{{formatCur(item.fee)}} vnd</span>
                                             <span>included</span>
-                                            <span>{{item.fee}} vnd</span>
-                                            <span>{{item.feeCount}} vnd</span>
-                                            <span>{{item.fee - item.feeCount}} vnd</span>
+                                            <span>{{formatCur(item.fee)}} vnd</span>
+                                            <span class="save save_n">-{{formatCur(item.feeCount)}} vnd</span>
+                                            <span style="color:#f06336;
+                                            font-weight: 500;">{{formatCur(item.fee - item.feeCount)}} vnd</span>
                                         </div>
                                     </div>
                                 </div>
@@ -234,12 +235,14 @@
                             <div class="collapse-modal hidden detail d-flex" id="{{'detaiCL' + item.id}}">
                                 <div class="w-40 d-flex">
                                     <div class="time-detail d-flex">
-                                        <div class="item_time time_des"><span>{{item.timeStart}}</span><span>11
+                                        <div class="item_time time_des"><span
+                                                class="time_i">{{item.timeStart}}</span><span class="date_i">11
                                                 Feb</span>
                                         </div>
                                         <div class="item_time relative time_count"><span>{{item.timeCount}}</span>
                                         </div>
-                                        <div class="item_time time_to"><span>{{item.timeTo}}</span><span>11 Feb</span>
+                                        <div class="item_time time_to"><span class="time_i">{{item.timeTo}}</span><span
+                                                class="date_i">11 Feb</span>
                                         </div>
                                     </div>
                                     <div class="line"><svg width="7" height="149" viewBox="0 0 7 149" fill="none"
@@ -254,15 +257,39 @@
                                     <div class="place-detail d-flex">
                                         <div class="from place-item d-flex">
                                             <span class="name">{{nameFrom}}({{idFrom}})</span>
-                                            <span class="time">dvdvdvdvd</span>
+                                            <span class="time">{{sanFrom}}</span>
                                         </div>
                                         <div class="to place-item d-flex">
                                             <span class="name">{{nameTo}}({{idTo}})</span>
-                                            <span class="time">dvdvdvdvd</span>
+                                            <span class="time">{{sanTo}}</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="w-60"></div>
+                                <div class="w-60">
+                                    <div class="title d-flex">
+                                        <div class="logo w-10">
+                                            <span><img [src]="item.icon" alt="logo"></span>
+                                        </div>
+                                        <div class="place_i w-90 d-flex">
+                                            <span class="name fw-500 uppercase">{{item.company}}</span>
+                                            <span class="sh">{{item.sh}}<span class="dot"></span>Economy</span>
+                                        </div>
+                                    </div>
+                                    <div class="info_fli d-flex">
+                                        <div class="w-50 d-flex flex-col">
+                                            <span>Baggage <span class="num-blue">{{item.baggage}}kg</span></span>
+                                            <span>In-flight <span
+                                                    class="num-blue">{{item.service[0].ser1}}</span></span>
+                                            <span>In-flight <span
+                                                    class="num-blue">{{item.service[0].ser2}}</span></span>
+                                        </div>
+                                        <div class="w-50 d-flex flex-col">
+                                            <span>Aircraft <span class="num-blue">{{item.aircraft}}</span></span>
+                                            <span>Seat Layout <span class="num-blue">{{item.seatLayout}}</span></span>
+                                            <span>Seat Peach <span class="num-blue">{{item.seatPeach}}</span></span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -277,53 +304,66 @@
                         <div class="place_1">
                             <div class="place d-flex">
                                 <div class="num w-20">
-                                    <span>01</span>
+                                    <div class="content">
+                                        <span>01</span>
+                                    </div>
                                 </div>
                                 <div class="place_i w-80 d-flex">
-                                    <span>Fri, 11 Feb, 2022</span>
-                                    <span><span>{{idFrom}}</span>-{{idTo}}</span>
+                                    <span class="date">{{dateFrom}}</span>
+                                    <span class="f_t"><span>{{nameFrom}}</span>-{{nameTo}}</span>
                                 </div>
                             </div>
-                            <div class="company_bill">
+                            <div class="company_bill d-flex">
                                 <div class="logo w-20">
-                                    <span><img [src]="" alt="logo"></span>
+                                    <span><img [src]="icon" alt="logo"></span>
                                 </div>
                                 <div class="place_i w-80 d-flex">
-                                    <span>scfascassavda</span>
-                                    <span>Details</span>
+                                    <span class="name">{{company}}</span>
+                                    <span class="details">Details</span>
                                 </div>
-                                <div class="time d-flex">
-                                    <div class="item_time time_des"><span>vdvdvdv</span><span>{{idFrom}}</span>
-                                    </div>
-                                    <div class="item_time relative time_count"><span>vdvdvdv</span>
-                                        <span class="absolute">
-                                            <svg width="92" height="7" viewBox="0 0 92 7" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <rect x="0.5" y="0.5" width="6" height="6" rx="3" fill="white"
-                                                    stroke="#4D46FA" />
-                                                <rect x="84.8188" width="7" height="7" rx="3.5" fill="#4D46FA" />
-                                                <line x1="7" y1="3.5" x2="85" y2="3.5" stroke="#4D46FA" />
-                                            </svg>
-                                        </span>
-                                        <span>Direct</span>
-                                    </div>
-                                    <div class="item_time time_to"><span>vdvdvdv</span><span>{{idFrom}}</span></div>
+
+                            </div>
+                            <div class="time d-flex">
+                                <div class="item_time time_des"><span class="text_i">21:40</span><span
+                                        class="sym">{{idFrom}}</span>
                                 </div>
-                                <div class="change_de_fly">
-                                    <button class="btn-change-f">Change departure flight</button>
+                                <div class="item_time relative time_count"><span>1h30m</span>
+                                    <span class="absolute">
+                                        <svg width="92" height="7" viewBox="0 0 92 7" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="0.5" y="0.5" width="6" height="6" rx="3" fill="white"
+                                                stroke="#4D46FA" />
+                                            <rect x="84.8188" width="7" height="7" rx="3.5" fill="#4D46FA" />
+                                            <line x1="7" y1="3.5" x2="85" y2="3.5" stroke="#4D46FA" />
+                                        </svg>
+                                    </span>
+                                    <span>Direct</span>
                                 </div>
+                                <div class="item_time time_to"><span class="text_i">23:10</span><span
+                                        class="sym">{{idTo}}</span></div>
+                            </div>
+                            <div class="change_de_fly">
+                                <button class="btn-change-f">Change departure flight</button>
                             </div>
                         </div>
                         <div class="place_2">
                             <div class="place d-flex">
                                 <div class="num w-20">
-                                    <span>02</span>
+                                    <div class="content" style="background: #4d46fa;">
+                                        <span>02</span>
+                                    </div>
                                 </div>
                                 <div class="place_i w-80 d-flex">
-                                    <span>Fri, 11 Feb, 2022</span>
+                                    <span>{{dateRe}}</span>
                                     <span><span>{{idFrom}}</span>-{{idTo}}</span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="total d-none" id="total">
+                        <div class="content">
+                            <span>SubTotal</span>
+                            <span class="price" style="color:#F06336; font-weight: 500;">{{price}} vnd</span>
                         </div>
                     </div>
                 </div>
